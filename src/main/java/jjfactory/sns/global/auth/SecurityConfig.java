@@ -1,9 +1,8 @@
 package jjfactory.sns.global.auth;
 
 import com.google.gson.Gson;
-import jjfactory.parking.global.dto.ErrorResponse;
-import jjfactory.parking.global.handler.ex.ErrorCode;
-import jjfactory.parking.global.handler.filter.TokenFilter;
+import jjfactory.sns.global.dto.ErrorResponse;
+import jjfactory.sns.global.handler.ex.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;

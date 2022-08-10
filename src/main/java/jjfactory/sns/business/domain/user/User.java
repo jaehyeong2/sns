@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -22,6 +24,10 @@ public class User extends BaseEntity {
     private String birth;
 
     private Address address;
+
+    @ElementCollection(fetch = FetchType.LAZY) //이거 없으면 에러남
+    @Enumerated(EnumType.STRING)
+    private List<Role> roles = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
