@@ -31,6 +31,8 @@ public class User extends BaseEntity {
     private int followCount;
     private int followerCount;
 
+    private int reportedCount;
+
     @ElementCollection(fetch = FetchType.LAZY) //이거 없으면 에러남
     @Enumerated(EnumType.STRING)
     private List<Role> roles = new ArrayList<>();
@@ -39,7 +41,7 @@ public class User extends BaseEntity {
     private Gender gender;
 
     @Builder
-    public User(String name, String username, String password, String email, String phone, String birth, Address address, int followCount, int followerCount, List<Role> roles, Gender gender) {
+    public User(String name, String username, String password, String email, String phone, String birth, Address address, int followCount, int followerCount, int reportedCount, List<Role> roles, Gender gender) {
         this.name = name;
         this.username = username;
         this.password = password;
@@ -49,6 +51,7 @@ public class User extends BaseEntity {
         this.address = address;
         this.followCount = followCount;
         this.followerCount = followerCount;
+        this.reportedCount = reportedCount;
         this.roles = roles;
         this.gender = gender;
     }
@@ -59,10 +62,15 @@ public class User extends BaseEntity {
                 .username(dto.getUsername())
                 .phone(dto.getPhone())
                 .password(encPassword)
+                .reportedCount(0)
+                .followCount(0)
+                .followerCount(0)
                 .email(dto.getEmail())
                 .birth(dto.getBirth())
                 .build();
     }
 
-
+    public void addWarningCount() {
+        this.reportedCount += 1;
+    }
 }
