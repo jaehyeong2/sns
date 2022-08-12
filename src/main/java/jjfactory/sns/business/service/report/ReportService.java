@@ -2,10 +2,13 @@ package jjfactory.sns.business.service.report;
 
 import jjfactory.sns.business.domain.report.Report;
 import jjfactory.sns.business.domain.user.User;
+import jjfactory.sns.business.repository.report.ReportQueryRepository;
 import jjfactory.sns.business.repository.report.ReportRepository;
 import jjfactory.sns.business.repository.user.UserRepository;
 import jjfactory.sns.business.request.report.ReportCreate;
 import jjfactory.sns.business.response.ReportRes;
+import jjfactory.sns.global.handler.ex.BusinessException;
+import jjfactory.sns.global.handler.ex.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +22,7 @@ import java.util.NoSuchElementException;
 @Transactional
 public class ReportService {
     private final ReportRepository reportRepository;
+    private final ReportQueryRepository reportQueryRepository;
     private final UserRepository userRepository;
 
     @Transactional(readOnly = true)
@@ -27,15 +31,18 @@ public class ReportService {
         return new ReportRes(report);
     }
 
-
     @Transactional(readOnly = true)
-    public Page<Object> findObjects(Pageable pageable){
-        return null;
+    public Page<ReportRes> findReports(Pageable pageable, Long userId){
+        return reportQueryRepository.findReportsByUserId(pageable,userId);
     }
 
     public Long create(ReportCreate dto){
         User user = getUser(dto.getUserId());
         User reported = getUser(dto.getReportedUserId());
+
+        if(user.equals(reported))
+            throw new BusinessException(ErrorCode.INVALID_REQUEST);
+
         Report report = Report.reportUser(dto, reported, user);
         reportRepository.save(report);
         return report.getId();
@@ -47,9 +54,6 @@ public class ReportService {
         return "Y";
     }
 
-    public String update(){
-        return "Y";
-    }
 
     private Report getReport(Long id) {
         Report report = reportRepository.findById(id).orElseThrow(NoSuchElementException::new);

@@ -7,19 +7,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public class ReportRes {
-    private Long userId;
-    private Long reportedUserId;
+    private String username;
+    private String reportedUsername;
     private String reason;
 
-    public ReportRes(Long userId, Long reportedUserId, String reason) {
-        this.userId = userId;
-        this.reportedUserId = reportedUserId;
+    public ReportRes(String username, String reportedUsername, String reason) {
+        this.username = username;
+        this.reportedUsername = reportedUsername;
         this.reason = reason;
     }
 
     public ReportRes(Report report) {
-        this.userId = report.getReportUser().getId();
-        this.reportedUserId = report.getReportedUser().getId();
+        this.username = report.getReportUser().getUsername();
+        this.reportedUsername = report.getReportedUser().getUsername();
         this.reason = report.getReportReason();
     }
 }

@@ -41,6 +41,7 @@ public class Report extends BaseEntity {
         Report report = Report.builder()
                 .reportedUser(reportedUser)
                 .reportUser(reportUser)
+                .reportReason(dto.getReason())
                 .build();
 
         return report;
