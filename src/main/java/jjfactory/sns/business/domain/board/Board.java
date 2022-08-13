@@ -3,6 +3,7 @@ package jjfactory.sns.business.domain.board;
 import jjfactory.sns.business.domain.BaseEntity;
 import jjfactory.sns.business.domain.user.User;
 import jjfactory.sns.business.request.board.BoardCreate;
+import jjfactory.sns.business.request.board.BoardUpdate;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -45,5 +46,10 @@ public class Board extends BaseEntity {
                 .viewCount(0)
                 .likeCount(0)
                 .build();
+    }
+
+    public void update(BoardUpdate dto) {
+        this.title = dto.getTitle();
+        this.content = dto.getContent();
     }
 }
