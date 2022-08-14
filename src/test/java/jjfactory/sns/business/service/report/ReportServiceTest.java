@@ -44,8 +44,8 @@ class ReportServiceTest {
         //given
         User lee = User.builder().username("lee22").build();
         User kim = User.builder().username("kim1234").build();
-        userRepository.save(kim);
-        userRepository.save(lee);
+        em.persist(kim);
+        em.persist(lee);
 
         Report report = Report.builder().reportUser(kim).reportedUser(lee).build();
         reportRepository.save(report);

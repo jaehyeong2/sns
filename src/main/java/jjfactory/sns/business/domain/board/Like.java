@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@Table(name = "board_like")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
