@@ -23,7 +23,6 @@ public class AuthService {
     private final PasswordEncoder encoder;
     private final JwtTokenProvider tokenProvider;
 
-    @Transactional
     public String signUp(UserCreate dto){
         duplicateCheck(dto.getUsername());
         String encPassword = encode(dto.getPassword());
