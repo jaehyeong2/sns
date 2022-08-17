@@ -52,21 +52,21 @@ class AuthServiceTest {
         assertThat(usernames).containsExactly("test1");
     }
 
-    //TODO 중복회원 가입실패
     @Test
     @DisplayName("아이디 중복이면 회원가입 실패")
     void signUpEx() {
         //given
-        UserCreate tester = UserCreate.builder().username("test1").password("1234").build();
+        User test1 = User.builder().username("test1").build();
+        UserCreate test2 = UserCreate.builder().username("test1").password("1234").build();
 
-        //when
-        authService.signUp(tester);
-        List<String> usernames = userRepository.findAll().stream()
-                .map(User::getUsername)
-                .collect(Collectors.toList());
+        em.persist(test1);
 
-        //then
-        assertThat(usernames).containsExactly("test1");
+        String errMsg = ErrorCode.DUPLICATE_LOGIN_ID.getMessage();
+
+        //expected
+        assertThatThrownBy(() ->{
+            authService.signUp(test2);
+        }).isInstanceOf(BusinessException.class).hasMessage(errMsg);
     }
 
     @Test
