@@ -1,35 +1,43 @@
 package jjfactory.sns.business.service.user;
 
+import jjfactory.sns.business.domain.user.User;
 import jjfactory.sns.business.repository.user.UserRepository;
+import jjfactory.sns.business.request.user.UserUpdate;
+import jjfactory.sns.business.response.UserInfoRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.NoSuchElementException;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
 public class UserService {
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    public Object findOne(){
-        return null;
+    //내정보 수정 get
+    public UserInfoRes getMyInfo(Long userId){
+        User user = getUser(userId);
+        return new UserInfoRes(user);
     }
 
-    public Page<Object> findObjects(Pageable pageable){
-        return null;
-    }
-
-    public Long create(){
-        return null;
-    }
-
-    public String delete(){
+    public String withdraw(Long userId){
+        User user = getUser(userId);
+        user.delete();
         return "Y";
     }
 
-    public String update(){
+    public String update(Long userId,UserUpdate dto){
+        User user = getUser(userId);
+        user.updateUserInfo(dto);
         return "Y";
+    }
+
+    private User getUser(Long id) {
+        User user = userRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        return user;
     }
 }

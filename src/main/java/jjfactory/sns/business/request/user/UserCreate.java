@@ -31,12 +31,4 @@ public class UserCreate {
         this.phone = phone;
         this.birth = birth;
     }
-
-    public UserCreate(User user) {
-        this.name = name;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.phone = phone;
-    }
 }

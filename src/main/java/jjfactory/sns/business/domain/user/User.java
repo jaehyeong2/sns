@@ -2,6 +2,7 @@ package jjfactory.sns.business.domain.user;
 
 import jjfactory.sns.business.domain.BaseEntity;
 import jjfactory.sns.business.request.user.UserCreate;
+import jjfactory.sns.business.request.user.UserUpdate;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -72,5 +73,12 @@ public class User extends BaseEntity {
 
     public void addWarningCount() {
         this.reportedCount += 1;
+    }
+
+    public void updateUserInfo(UserUpdate dto) {
+        this.birth = dto.getBirth();
+        this.phone = dto.getPhone();
+        this.address = dto.getAddress();
+        this.email = dto.getEmail();
     }
 }
