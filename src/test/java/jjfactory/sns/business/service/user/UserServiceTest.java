@@ -4,7 +4,6 @@ import jjfactory.sns.business.domain.user.Address;
 import jjfactory.sns.business.domain.user.User;
 import jjfactory.sns.business.request.user.UserUpdate;
 import jjfactory.sns.business.response.UserInfoRes;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 @Transactional
 @SpringBootTest
@@ -39,7 +37,7 @@ class UserServiceTest {
         em.persist(wogud222);
 
         //when
-        UserInfoRes myInfo = userService.getMyInfo(wogud222.getId());
+        UserInfoRes myInfo = userService.getUpdateForm(wogud222.getId());
 
         //then
         assertThat(myInfo.getUsername()).isEqualTo("wogud222");
@@ -54,8 +52,8 @@ class UserServiceTest {
         User wogud222 = User.builder()
                 .username("wogud222")
                 .password("1234")
-                .name("이재형")
                 .email("test@naver.com")
+                .name("이재형")
                 .address(Address.builder().city("서울").zipCode("1234").build())
                 .build();
         em.persist(wogud222);

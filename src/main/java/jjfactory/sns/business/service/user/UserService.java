@@ -5,8 +5,6 @@ import jjfactory.sns.business.repository.user.UserRepository;
 import jjfactory.sns.business.request.user.UserUpdate;
 import jjfactory.sns.business.response.UserInfoRes;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +17,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     //내정보 수정 get
-    public UserInfoRes getMyInfo(Long userId){
+    public UserInfoRes getUpdateForm(Long userId){
         User user = getUser(userId);
         return new UserInfoRes(user);
     }
