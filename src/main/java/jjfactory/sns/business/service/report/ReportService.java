@@ -26,7 +26,7 @@ public class ReportService {
     private final UserRepository userRepository;
 
     @Transactional(readOnly = true)
-    public ReportRes findOne(Long id){
+    public ReportRes findReport(Long id){
         Report report = getReport(id);
         return new ReportRes(report);
     }

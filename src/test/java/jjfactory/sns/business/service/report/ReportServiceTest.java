@@ -51,7 +51,7 @@ class ReportServiceTest {
         reportRepository.save(report);
 
         //when
-        ReportRes findReport = reportService.findOne(report.getId());
+        ReportRes findReport = reportService.findReport(report.getId());
 
         //then
         assertThat(findReport.getUsername()).isEqualTo("kim1234");
