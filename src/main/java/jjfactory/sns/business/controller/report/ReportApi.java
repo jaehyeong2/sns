@@ -11,7 +11,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import javax.swing.plaf.PanelUI;
+import javax.validation.Valid;
 
+
+//TODO 스웨거 추가
 @RequiredArgsConstructor
 @RequestMapping("/reports")
 @RestController
@@ -31,7 +34,7 @@ public class ReportApi {
     }
 
     @PostMapping("")
-    public ApiResponse<Long> create(@RequestBody ReportCreate dto){
+    public ApiResponse<Long> create(@RequestBody @Valid ReportCreate dto){
         return new ApiResponse<>(reportService.create(dto));
     }
 

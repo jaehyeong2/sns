@@ -13,6 +13,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 import static org.springframework.data.domain.Sort.Direction.*;
 
 @RequiredArgsConstructor
@@ -34,7 +36,7 @@ public class BoardApi {
 
     //TODO 시큐리티 적용
     @PostMapping("")
-    public Long createBoard(@RequestBody BoardCreate dto){
+    public Long createBoard(@RequestBody @Valid BoardCreate dto){
         return boardService.create(dto);
     }
 

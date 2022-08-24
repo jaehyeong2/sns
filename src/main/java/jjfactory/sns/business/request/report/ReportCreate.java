@@ -4,12 +4,17 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+
 
 @NoArgsConstructor
 @Getter
 public class ReportCreate {
+    @NotBlank
     private String reason;
+    @NotBlank
     private Long userId;
+    @NotBlank
     private Long reportedUserId;
 
     @Builder
