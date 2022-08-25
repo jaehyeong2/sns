@@ -1,5 +1,6 @@
 package jjfactory.sns.business.controller.user;
 
+import io.swagger.annotations.ApiOperation;
 import jjfactory.sns.business.request.user.LoginReq;
 import jjfactory.sns.business.request.user.UserCreate;
 import jjfactory.sns.business.response.LoginRes;
@@ -20,11 +21,13 @@ import javax.validation.Valid;
 public class AuthApi {
     private final AuthService authService;
 
+    @ApiOperation(value = "회원가입")
     @PostMapping("/signup")
     public ApiResponse<String> signUp(@Valid @RequestBody UserCreate dto){
         return new ApiResponse<>(authService.signUp(dto));
     }
 
+    @ApiOperation(value = "로그인")
     @PostMapping("/login")
     public LoginRes login(@Valid @RequestBody LoginReq dto){
         return authService.login(dto);
