@@ -56,4 +56,8 @@ public class Comment extends BaseEntity {
                 .content(dto.getContent())
                 .build();
     }
+
+    public void modify(String content) {
+        this.content = content;
+    }
 }
