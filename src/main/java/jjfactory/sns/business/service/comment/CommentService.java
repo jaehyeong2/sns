@@ -29,6 +29,8 @@ public class CommentService {
     private final UserRepository userRepository;
     private final BoardRepository boardRepository;
 
+    
+    //TODO  무한 대댓글
     @Transactional(readOnly = true)
     public Page<CommentRes> findComments(Long boardId,Pageable pageable){
         return commentQueryRepository.findComments(boardId,pageable);
